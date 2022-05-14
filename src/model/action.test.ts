@@ -4,11 +4,14 @@ import path from 'path';
 
 describe('Action', () => {
   describe('compatibility check', () => {
-    it('throws for anything other than linux', () => {
-      if (process.platform !== 'linux') {
-        expect(() => Action.checkCompatibility()).toThrow();
-      } else {
-        expect(() => Action.checkCompatibility()).not.toThrow();
+    it('throws for anything other than linux or windows', () => {
+      switch (process.platform) {
+        case 'linux':
+        case 'win32':
+          expect(() => Action.checkCompatibility()).not.toThrow();
+          break;
+        default:
+          expect(() => Action.checkCompatibility()).toThrow();
       }
     });
   });
