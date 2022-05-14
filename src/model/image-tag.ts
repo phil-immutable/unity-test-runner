@@ -54,6 +54,8 @@ class ImageTag {
 
   static getImagePlatformPrefix(platform) {
     switch (platform) {
+      case 'win32':
+        return 'windows';
       case 'linux':
         return 'ubuntu';
       default:
