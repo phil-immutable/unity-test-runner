@@ -208,10 +208,6 @@ const Docker = {
         ${gitPrivateToken ? `--env GIT_PRIVATE_TOKEN="${gitPrivateToken}"` : ''} \
         ${sshAgent ? '--env SSH_AUTH_SOCK=/ssh-agent' : ''} \
         --volume "${workspace}":"c:/github/workspace" \
-        --volume "c:/regkeys":"c:/regkeys" \
-        --volume "C:/Program Files (x86)/Microsoft Visual Studio":"C:/Program Files (x86)/Microsoft Visual Studio" \
-        --volume "C:/Program Files (x86)/Windows Kits":"C:/Program Files (x86)/Windows Kits" \
-        --volume "C:/ProgramData/Microsoft/VisualStudio":"C:/ProgramData/Microsoft/VisualStudio" \
         --volume "${actionFolder}/platforms/windows":"c:/steps" \
         --volume "${actionFolder}/BlankProject":"c:/BlankProject" \
         ${useHostNetwork ? '--net=host' : ''} \
@@ -264,12 +260,12 @@ const Docker = {
         --volume "${githubHome}":"/root:z" \
         --volume "${githubWorkflow}":"/github/workflow:z" \
         --volume "${workspace}":"/github/workspace:z" \
-        --volume "${actionFolder}/platforms/ubuntu/steps:/steps:z" \
-        --volume "${actionFolder}/platforms/ubuntu/entrypoint.sh:/entrypoint.sh:z" \
+        --volume "${actionFolder}/steps:/steps:z" \
+        --volume "${actionFolder}/entrypoint.sh:/entrypoint.sh:z" \
         ${useHostNetwork ? '--net=host' : ''} \
         ${githubToken ? '--env USE_EXIT_CODE=false' : '--env USE_EXIT_CODE=true'} \
         ${image} \
-        /bin/bash -c /entrypoint.sh`;
+        /bin/bash /entrypoint.sh`;
     },
 };
 exports["default"] = Docker;
