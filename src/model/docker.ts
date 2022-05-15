@@ -77,13 +77,12 @@ const Docker = {
         --volume "C:/Program Files (x86)/Microsoft Visual Studio":"C:/Program Files (x86)/Microsoft Visual Studio" \
         --volume "C:/Program Files (x86)/Windows Kits":"C:/Program Files (x86)/Windows Kits" \
         --volume "C:/ProgramData/Microsoft/VisualStudio":"C:/ProgramData/Microsoft/VisualStudio" \
-        --volume "${actionFolder}/default-build-script":"c:/UnityBuilderAction" \
         --volume "${actionFolder}/platforms/windows":"c:/steps" \
         --volume "${actionFolder}/BlankProject":"c:/BlankProject" \
         ${useHostNetwork ? '--net=host' : ''} \
         ${githubToken ? '--env USE_EXIT_CODE=false' : '--env USE_EXIT_CODE=true'} \
         ${image} \
-        powershell c:/'steps/entrypoint.ps1`;
+        powershell c:/steps/entrypoint.ps1`;
   },
 
   getLinuxCommand(image, parameters): string {
@@ -147,13 +146,12 @@ const Docker = {
         --volume "${githubHome}":"/root:z" \
         --volume "${githubWorkflow}":"/github/workflow:z" \
         --volume "${workspace}":"/github/workspace:z" \
-        --volume "${actionFolder}/default-build-script:/UnityBuilderAction:z" \
         --volume "${actionFolder}/platforms/ubuntu/steps:/steps:z" \
         --volume "${actionFolder}/platforms/ubuntu/entrypoint.sh:/entrypoint.sh:z" \
         ${useHostNetwork ? '--net=host' : ''} \
         ${githubToken ? '--env USE_EXIT_CODE=false' : '--env USE_EXIT_CODE=true'} \
         ${image} \
-        /bin/bash /entrypoint.sh`;
+        /bin/bash -c /entrypoint.sh`;
   },
 };
 
