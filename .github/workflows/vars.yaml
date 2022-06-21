@@ -30,4 +30,4 @@ jobs:
           if ($env:IS_FREE_LOCAL == '') {
             Write-Host "if4"
           }
-
+          ./vars.ps1
