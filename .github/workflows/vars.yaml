@@ -13,6 +13,7 @@ jobs:
     
     - name: Env vars
       shell: pwsh
+      id: set-vars
       env:
         IS_FREE_LOCAL: ${{ secrets.IS_FREE }}
       run: |
@@ -22,6 +23,7 @@ jobs:
             Write-Host "if1"
           }
           ./vars.ps1
+          echo ::set-output name=inline::"inline1234"
           Write-Host $env:IS_THIS_ACCESSIBLE
           
     - name: Env vars
@@ -29,3 +31,7 @@ jobs:
       run: |
           Write-Host "test"
           Write-Host $env:IS_THIS_ACCESSIBLE
+          Write-Host "test2"
+          Write-Host ${{ steps.set-vars.outputs.inline }}
+          Write-Host "test3"
+          Write-Host ${{ steps.set-vars.outputs.script }}
