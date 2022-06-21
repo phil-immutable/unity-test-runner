@@ -22,3 +22,10 @@ jobs:
             Write-Host "if1"
           }
           ./vars.ps1
+          Write-Host $env:IS_THIS_ACCESSIBLE
+          
+    - name: Env vars
+      shell: pwsh
+      run: |
+          Write-Host "test"
+          Write-Host $env:IS_THIS_ACCESSIBLE
