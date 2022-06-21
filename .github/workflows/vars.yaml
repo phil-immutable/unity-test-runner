@@ -1,0 +1,35 @@
+name: Env vars
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Env vars
+      shell: pwsh
+      env:
+        IS_FREE_LOCAL: ${{ secrets.IS_FREE }}
+      run: |
+          [bool]$env:IS_FREE_LOCAL
+          [bool]$env:IS_FREE
+          [bool]${{ secrets.IS_FREE }}
+          [bool]${{ secrets.FAKE }}
+          if (Test-Path env:IS_FREE_LOCAL) {
+            Write-Host "if1"
+          }
+          if (env:IS_FREE_LOCAL) {
+            Write-Host "if2"
+          }
+          if ($env:IS_FREE_LOCAL) {
+            Write-Host "if3"
+          }
+          if ($env:IS_FREE_LOCAL == '') {
+            Write-Host "if4"
+          }
+
