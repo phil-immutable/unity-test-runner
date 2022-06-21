@@ -35,3 +35,5 @@ jobs:
           Write-Host ${{ steps.set-vars.outputs.inline }}
           Write-Host "test3"
           Write-Host ${{ steps.set-vars.outputs.script }}
+          Write-Host "test4"
+          Write-Host ${{ env:IS_THIS_ACCESSIBLE2 }}
