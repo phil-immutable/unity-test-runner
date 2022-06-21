@@ -1,10 +1,7 @@
 name: Env vars
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch: {}
 
 jobs:
   build:
@@ -20,14 +17,5 @@ jobs:
           [bool]$env:IS_FREE
           if (Test-Path env:IS_FREE_LOCAL) {
             Write-Host "if1"
-          }
-          if (env:IS_FREE_LOCAL) {
-            Write-Host "if2"
-          }
-          if ($env:IS_FREE_LOCAL) {
-            Write-Host "if3"
-          }
-          if ($env:IS_FREE_LOCAL == '') {
-            Write-Host "if4"
           }
           ./vars.ps1
