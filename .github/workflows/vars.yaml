@@ -18,8 +18,6 @@ jobs:
       run: |
           [bool]$env:IS_FREE_LOCAL
           [bool]$env:IS_FREE
-          [bool]${{ secrets.IS_FREE }}
-          [bool]${{ secrets.FAKE }}
           if (Test-Path env:IS_FREE_LOCAL) {
             Write-Host "if1"
           }
