@@ -23,7 +23,7 @@ jobs:
             Write-Host "if1"
           }
           ./vars.ps1
-          echo ::set-output name=inline::"inline1234"
+          echo "::set-output name=inline::inline1234"
           Write-Host $env:IS_THIS_ACCESSIBLE
           
     - name: Env vars
